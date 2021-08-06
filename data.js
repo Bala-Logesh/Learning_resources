@@ -46,6 +46,14 @@ export const data = [
     link:
      'https://github.com/cmsanju/FSDJAVACLOUD/blob/master/Complete%20SQL.pptx.pdf',
    },
+   {
+    name: 'MongoDB - Ramasubramanian',
+    link: './MongoDB.html',
+   },
+   {
+    name: 'SQL - Ramasubramanian',
+    link: './sql.html',
+   },
   ],
  },
  {

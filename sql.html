@@ -1,0 +1,904 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-06-06 Sun 11:47 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SQL ESSENTIAL TRAINING [LinkedIn Learning]</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Ramasubramaniyan G" />
+<meta name="description" content="Complete SQL Training from Scratch using SQLite and SQLite Studio"
+ />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+	font-family: 'Fira Code', monospace !important;
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+	font-family: 'Fira Code', monospace !important;
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body style="font-family: 'Fira Sans', sans-serif !important;">
+<div id="content">
+<h1 class="title">SQL ESSENTIAL TRAINING</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org3058f1b">1. SQL Overview</a>
+<ul>
+<li><a href="#org32a1ce8">1.1. Specifying the database to use (<code>USE</code> Statement)</a></li>
+<li><a href="#org500b7cb">1.2. The <code>SELECT</code> Statement</a></li>
+<li><a href="#org47441ab">1.3. Selecting Rows (<code>WHERE</code> Clause)</a></li>
+<li><a href="#orgac03521">1.4. Selecting Columns</a></li>
+<li><a href="#org675e692">1.5. Counting Rows (<code>COUNT</code> clause)</a></li>
+<li><a href="#org60755db">1.6. Inserting Data (<code>INSERT INTO</code> Statement)</a></li>
+<li><a href="#org3a752b9">1.7. Updating data (<code>UPDATE</code> Statement)</a></li>
+<li><a href="#orgfa80dae">1.8. Deleting data (<code>DELETE FROM</code> Statement)</a></li>
+</ul>
+</li>
+<li><a href="#org641d70f">2. Fundamental Concepts</a>
+<ul>
+<li><a href="#orge0791af">2.1. Creating a table (<code>CREATE TABLE</code> Statement)</a></li>
+<li><a href="#org622a02d">2.2. Deleting a table (<code>DROP TABLE</code> Statement)</a></li>
+<li><a href="#org9b83800">2.3. Inserting into a table</a></li>
+<li><a href="#org11f285b">2.4. Deleting Rows (<code>DELETE FROM</code> Statement)</a></li>
+<li><a href="#orgdfec6a9">2.5. The <code>NULL</code> value</a></li>
+<li><a href="#org060b5ad">2.6. Constraining Column</a></li>
+<li><a href="#org4a4aa88">2.7. Changing a Schema (<code>ALTER TABLE</code> Statement)</a></li>
+<li><a href="#org8885679">2.8. <code>ID</code> Columns</a></li>
+<li><a href="#orga1275ea">2.9. Filtering data</a></li>
+<li><a href="#orgffc1a81">2.10. Removing Duplicates (<code>SELECT DISTINCT</code> Statement)</a></li>
+<li><a href="#orge523d59">2.11. Ordering Output (<code>ORDER BY</code> Clause)</a></li>
+<li><a href="#orgf6234ec">2.12. Conditional Expressions</a></li>
+</ul>
+</li>
+<li><a href="#orgf1f82ac">3. Relationships</a>
+<ul>
+<li><a href="#orgeb10894">3.1. Understanding <code>JOIN</code></a></li>
+<li><a href="#orgc425164">3.2. Accessing Related Tables</a></li>
+<li><a href="#orga6cc4cd">3.3. Relating Multiple Tables</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org3058f1b" class="outline-2">
+<h2 id="org3058f1b"><span class="section-number-2">1.</span> SQL Overview</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org32a1ce8" class="outline-3">
+<h3 id="org32a1ce8"><span class="section-number-3">1.1.</span> Specifying the database to use (<code>USE</code> Statement)</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+We can specify which database to use at a point of time by the help of <code>USE</code> statement <i>viz</i>
+</p>
+<div class="org-src-container">
+<pre class="src src-sql">USE database_name;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org500b7cb" class="outline-3">
+<h3 id="org500b7cb"><span class="section-number-3">1.2.</span> The <code>SELECT</code> Statement</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+It is used to retrieve the contents (columns) or it can also be used on a plain string or number. If it is used in conjunction with the <code>AS</code> clause, then the <code>AS</code> clause (re)names the column.
+</p>
+
+<p>
+The <code>ORDER BY</code> clause is used to order a column from the columns retrieved via the <code>SELECT</code> clause. Example syntax is shown below
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> Country <span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> <span style="color: #4f97d7; font-weight: bold;">Name</span>;
+</pre>
+</div>
+<p>
+Specific columns can be retrieved by specifying the column names next to the <code>SELECT</code> clause and the column names being delimited by <code>,</code>. A specific column name can be given an alias by using the <code>AS</code> clause <i>viz</i>
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> <span style="color: #4f97d7; font-weight: bold;">Name</span>, LifeExpectancy <span style="color: #4f97d7; font-weight: bold;">AS</span> "Life Expectancy" <span style="color: #4f97d7; font-weight: bold;">from</span> Country;
+</pre>
+</div>
+
+<p>
+The difference between the use of <code>''</code> and <code>""</code> is that <code>''</code> is used for a literal string and most other things like identifiers use <code>""</code>.
+</p>
+
+<p>
+The following still works (i.e. even in the elimination of <code>AS</code> clause)  but it is not a good practice. 
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> <span style="color: #4f97d7; font-weight: bold;">Name</span>, LifeExpectancy "Life Expectancy" <span style="color: #4f97d7; font-weight: bold;">from</span> Country;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org47441ab" class="outline-3">
+<h3 id="org47441ab"><span class="section-number-3">1.3.</span> Selecting Rows (<code>WHERE</code> Clause)</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+We can select particular <b>rows</b> by using the <code>WHERE</code> clause which evaluates a logical expression. For example,
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> <span style="color: #4f97d7; font-weight: bold;">Name</span>, Continent, Region <span style="color: #4f97d7; font-weight: bold;">FROM</span> Country <span style="color: #4f97d7; font-weight: bold;">WHERE</span> Continent = <span style="color: #2d9574;">'Europe'</span>;
+</pre>
+</div>
+<p>
+Note that <code>'Europe'</code> is enclosed within a single quote as it is a value - a literal string.
+</p>
+
+<p>
+We can also sort the result of the above by using the <code>ORDER BY</code> clause and also limit the number of rows to be displayed by the <code>LIMIT</code> clause <i>viz.</i>
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> <span style="color: #4f97d7; font-weight: bold;">Name</span>, Continent, Region <span style="color: #4f97d7; font-weight: bold;">FROM</span> Country <span style="color: #4f97d7; font-weight: bold;">WHERE</span> Continent = <span style="color: #2d9574;">'Europe'</span> <span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> <span style="color: #4f97d7; font-weight: bold;">Name</span> <span style="color: #4f97d7; font-weight: bold;">LIMIT</span> <span style="color: #a45bad;">5</span>;
+</pre>
+</div>
+<p>
+This will show only the first <code>5</code> rows <b>after</b> ordering. But if we need the second <code>5</code> rows i.e. from <code>6</code> to <code>10</code>, then we have to specify an offset using the <code>OFFSET</code> clause <i>viz.</i>
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> <span style="color: #4f97d7; font-weight: bold;">Name</span>, Continent, Region <span style="color: #4f97d7; font-weight: bold;">FROM</span> Country <span style="color: #4f97d7; font-weight: bold;">WHERE</span> Continent = <span style="color: #2d9574;">'Europe'</span> <span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> <span style="color: #4f97d7; font-weight: bold;">Name</span> <span style="color: #4f97d7; font-weight: bold;">LIMIT</span> <span style="color: #a45bad;">5</span> OFFSET <span style="color: #a45bad;">5</span>;
+</pre>
+</div>
+
+<p>
+NOTE 
+Clauses need to be in a specific order
+</p>
+<ol class="org-ol">
+<li><code>ORDER BY</code> must be <b>after</b> the <code>WHERE</code> clause</li>
+<li><code>LIMIT</code> and <code>OFFSET</code> needs to be at the last</li>
+<li><code>FROM</code> needs to be at the first.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgac03521" class="outline-3">
+<h3 id="orgac03521"><span class="section-number-3">1.4.</span> Selecting Columns</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+A particular column can be selected by specifying the column name next to the <code>SELECT</code> clause. The order of the columns specified in the column names list next to the <code>SELECT</code> clause is same as the column order retured by the query.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org675e692" class="outline-3">
+<h3 id="org675e692"><span class="section-number-3">1.5.</span> Counting Rows (<code>COUNT</code> clause)</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+To count the total number of rows we can do the following 
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> <span style="color: #4f97d7;">COUNT</span><span style="color: #4f97d7;">(</span>*<span style="color: #4f97d7;">)</span> <span style="color: #4f97d7; font-weight: bold;">FROM</span> Country;
+</pre>
+</div>
+
+<p>
+To count the number of filtered rows returned using a conditional, we can use the following
+</p>
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> <span style="color: #4f97d7;">COUNT</span><span style="color: #4f97d7;">(</span>*<span style="color: #4f97d7;">)</span> <span style="color: #4f97d7; font-weight: bold;">FROM</span> Country <span style="color: #4f97d7; font-weight: bold;">WHERE</span> Continent = <span style="color: #2d9574;">'Europe'</span>
+</pre>
+</div>
+
+<p>
+Even if we specify <code>LIMIT</code> and <code>OFFSET</code> in the above statement it returns the total rows matching the condition in the <code>WHERE</code> clause and <b>NOT</b> the number of rows limited by the <code>LIMIT</code> clause.
+</p>
+
+<p>
+Also, we can specify a column name and it will return the number of rows which match the conditions <b>and have data</b> in them. Rows without data are excluded. We can chain conditional statements using <code>OR</code>, <code>AND</code>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org60755db" class="outline-3">
+<h3 id="org60755db"><span class="section-number-3">1.6.</span> Inserting Data (<code>INSERT INTO</code> Statement)</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+We can insert a row of data (not necessarily all of them filled) into the table by using the <code>INSERT INTO</code> statament <i>viz</i>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql">
+<span style="color: #2aa1ae; background-color: #292e34;">--test.db</span>
+
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> customer;
+<span style="color: #2aa1ae; background-color: #292e34;">-- Just for knowing whether the columns are right, exists etc.</span>
+
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> customer <span style="color: #4f97d7;">(</span> <span style="color: #4f97d7; font-weight: bold;">name</span>, address, city, <span style="color: #4f97d7; font-weight: bold;">state</span>, zip<span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'Sherlock Holmes'</span>, <span style="color: #2d9574;">'221B Baker Street'</span>, <span style="color: #2d9574;">'London'</span>, <span style="color: #2d9574;">'None'</span>, <span style="color: #2d9574;">'NW1 6XE'</span><span style="color: #4f97d7;">)</span>;
+
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> customer <span style="color: #4f97d7;">(</span> <span style="color: #4f97d7; font-weight: bold;">name</span>, address, city, <span style="color: #4f97d7; font-weight: bold;">state</span>, zip<span style="color: #4f97d7;">)</span>
+<span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span><span style="color: #2d9574;">'Watson'</span>, <span style="color: #2d9574;">'123 Cobblestone Way'</span>, <span style="color: #2d9574;">'Bedrock'</span>, <span style="color: #2d9574;">'CA'</span>, <span style="color: #2d9574;">'91234'</span><span style="color: #4f97d7;">)</span>;
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org3a752b9" class="outline-3">
+<h3 id="org3a752b9"><span class="section-number-3">1.7.</span> Updating data (<code>UPDATE</code> Statement)</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+To update an existing entry in the database we can use the <code>UPDATE</code> statement <i>viz</i>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql">
+<span style="color: #2aa1ae; background-color: #292e34;">-- test.db</span>
+
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> customer;
+<span style="color: #4f97d7; font-weight: bold;">UPDATE</span> customer <span style="color: #4f97d7; font-weight: bold;">SET</span> address = <span style="color: #2d9574;">'123 Music Avenue'</span>, zip = <span style="color: #2d9574;">'98056'</span> <span style="color: #4f97d7; font-weight: bold;">WHERE</span> id = <span style="color: #a45bad;">5</span>;
+<span style="color: #4f97d7; font-weight: bold;">UPDATE</span> customer <span style="color: #4f97d7; font-weight: bold;">SET</span> address = <span style="color: #2d9574;">'2603 S Washington St'</span>, zip = <span style="color: #2d9574;">'98056'</span> <span style="color: #4f97d7; font-weight: bold;">WHERE</span> id = <span style="color: #a45bad;">5</span>;
+<span style="color: #4f97d7; font-weight: bold;">UPDATE</span> customer <span style="color: #4f97d7; font-weight: bold;">SET</span> address = <span style="color: #4f97d7; font-weight: bold;">NULL</span>, zip = <span style="color: #4f97d7; font-weight: bold;">NULL</span> <span style="color: #4f97d7; font-weight: bold;">WHERE</span> id = <span style="color: #a45bad;">5</span>;
+</pre>
+</div>
+
+<p>
+<code>NULL</code> is a special value which just leaves the record blank
+</p>
+
+<p>
+If <code>UPDATE</code> statement is used <b>without</b> a <code>WHERE</code> clause, then the <b>entire table is updated</b>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgfa80dae" class="outline-3">
+<h3 id="orgfa80dae"><span class="section-number-3">1.8.</span> Deleting data (<code>DELETE FROM</code> Statement)</h3>
+<div class="outline-text-3" id="text-1-8">
+<p>
+We can delete a particular row from the table using the <code>DELETE</code> statement. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> customer <span style="color: #4f97d7; font-weight: bold;">WHERE</span> id = <span style="color: #a45bad;">4</span>;
+<span style="color: #4f97d7; font-weight: bold;">DELETE</span> <span style="color: #4f97d7; font-weight: bold;">FROM</span> customer <span style="color: #4f97d7; font-weight: bold;">WHERE</span> id = <span style="color: #a45bad;">4</span>;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> customer;
+<span style="color: #4f97d7; font-weight: bold;">DELETE</span> <span style="color: #4f97d7; font-weight: bold;">FROM</span> customer <span style="color: #4f97d7; font-weight: bold;">WHERE</span> id = <span style="color: #a45bad;">5</span>;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> customer;
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org641d70f" class="outline-2">
+<h2 id="org641d70f"><span class="section-number-2">2.</span> Fundamental Concepts</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-orge0791af" class="outline-3">
+<h3 id="orge0791af"><span class="section-number-3">2.1.</span> Creating a table (<code>CREATE TABLE</code> Statement)</h3>
+<div class="outline-text-3" id="text-2-1">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">CREATE</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #bc6ec5; font-weight: bold;">test</span> <span style="color: #4f97d7;">(</span>
+<span style="color: #2aa1ae; background-color: #292e34;">-- Column definitions. These are also called database schema or table schema</span>
+a <span style="color: #ce537a; font-weight: bold;">INTEGER</span>,
+<span style="color: #2aa1ae; background-color: #292e34;">-- Syntax : COLUMN_NAME DATA_TYPE(,) ',' is used only during separation</span>
+<span style="color: #2aa1ae; background-color: #292e34;">-- and the final column cannot have a comma</span>
+b TEXT
+<span style="color: #4f97d7;">)</span>;
+
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">1</span>, <span style="color: #2d9574;">'a'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">2</span>, <span style="color: #2d9574;">'b'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">3</span>, <span style="color: #2d9574;">'c'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> test;
+</pre>
+</div>
+</div>
+</div>
+<p>
+If a table already exists then it will throw an error stating the existence of a table of the same name already.
+</p>
+<div id="outline-container-org622a02d" class="outline-3">
+<h3 id="org622a02d"><span class="section-number-3">2.2.</span> Deleting a table (<code>DROP TABLE</code> Statement)</h3>
+<div class="outline-text-3" id="text-2-2">
+	
+
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">CREATE</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #bc6ec5; font-weight: bold;">test</span> <span style="color: #4f97d7;">(</span> a TEXT, b TEXT <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #2d9574;">'one'</span>, <span style="color: #2d9574;">'two'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> test;
+<span style="color: #4f97d7; font-weight: bold;">DROP</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #bc6ec5; font-weight: bold;">test</span>;
+<span style="color: #2aa1ae; background-color: #292e34;">--If there is no such table, then it will throw an error</span>
+<span style="color: #2aa1ae; background-color: #292e34;">-- stating that there is no table by the given name.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">-- So, to avoid this we use the following.</span>
+<span style="color: #4f97d7; font-weight: bold;">DROP</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #bc6ec5; font-weight: bold;">IF</span> <span style="color: #4f97d7; font-weight: bold;">EXISTS</span> test;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9b83800" class="outline-3">
+<h3 id="org9b83800"><span class="section-number-3">2.3.</span> Inserting into a table</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+[Tested using mismatching data types : It throws no error]
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">CREATE</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #bc6ec5; font-weight: bold;">test</span> <span style="color: #4f97d7;">(</span> a <span style="color: #ce537a; font-weight: bold;">INTEGER</span>, b TEXT, c TEXT <span style="color: #4f97d7;">)</span>;
+
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">1</span>, <span style="color: #2d9574;">'This'</span>, <span style="color: #2d9574;">'Right here!'</span> <span style="color: #4f97d7;">)</span>; 
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7;">(</span> b, c <span style="color: #4f97d7;">)</span> <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #2d9574;">'That'</span>, <span style="color: #2d9574;">'Over there!'</span> <span style="color: #4f97d7;">)</span>;  <span style="color: #2aa1ae; background-color: #292e34;">-- This will leave `a` with NULL</span>
+<span style="color: #2aa1ae; background-color: #292e34;">-- NULL is different from 0 and ''. It is a lack of value</span>
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7; font-weight: bold;">DEFAULT</span> <span style="color: #4f97d7; font-weight: bold;">VALUES</span>;
+<span style="color: #2aa1ae; background-color: #292e34;">-- This will insert a row with NULL in all  columns</span>
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7;">(</span> a, b, c <span style="color: #4f97d7;">)</span> <span style="color: #4f97d7; font-weight: bold;">SELECT</span> id, <span style="color: #4f97d7; font-weight: bold;">name</span>, description <span style="color: #4f97d7; font-weight: bold;">from</span> item;
+<span style="color: #2aa1ae; background-color: #292e34;">-- We need not specify VALUES.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">-- We can insert all (without using the WHERE clause) or specific records from another table.</span>
+
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> test;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org11f285b" class="outline-3">
+<h3 id="org11f285b"><span class="section-number-3">2.4.</span> Deleting Rows (<code>DELETE FROM</code> Statement)</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+We can delete a specific (number of) row(s) by using the <code>DELETE FROM</code> followed by a <code>WHERE</code> clause which requires the condition for selecting rows for deleting.
+We can delete all the <b>records</b> of a table but <b>NOT</b> the table itself by just using <code>DELETE FROM &lt;table_name&gt;;</code> which will match all the rows of the table.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> test;
+<span style="color: #4f97d7; font-weight: bold;">DELETE</span> <span style="color: #4f97d7; font-weight: bold;">FROM</span> test <span style="color: #4f97d7; font-weight: bold;">WHERE</span> a = <span style="color: #a45bad;">3</span>;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> test <span style="color: #4f97d7; font-weight: bold;">WHERE</span> a = <span style="color: #a45bad;">1</span>;
+<span style="color: #4f97d7; font-weight: bold;">DELETE</span> <span style="color: #4f97d7; font-weight: bold;">FROM</span> test <span style="color: #4f97d7; font-weight: bold;">WHERE</span> a = <span style="color: #a45bad;">1</span>;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgdfec6a9" class="outline-3">
+<h3 id="orgdfec6a9"><span class="section-number-3">2.5.</span> The <code>NULL</code> value</h3>
+<div class="outline-text-3" id="text-2-5">
+<p>
+We can use <code>IS NULL</code> and <code>IS NULL</code> to check if it is a value or if it lacks a value respectively.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> test;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> test <span style="color: #4f97d7; font-weight: bold;">WHERE</span> a = <span style="color: #4f97d7; font-weight: bold;">NULL</span>;
+<span style="color: #2aa1ae; background-color: #292e34;">-- This cannot be used to test if a value is null.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">-- Even the previous sentence is contradictory.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">-- How will we check if a value is a *lack of value*?</span>
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> test <span style="color: #4f97d7; font-weight: bold;">WHERE</span> a <span style="color: #4f97d7; font-weight: bold;">IS</span> <span style="color: #4f97d7; font-weight: bold;">NULL</span>;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> test <span style="color: #4f97d7; font-weight: bold;">WHERE</span> a <span style="color: #4f97d7; font-weight: bold;">IS</span> <span style="color: #4f97d7; font-weight: bold;">NOT</span> <span style="color: #4f97d7; font-weight: bold;">NULL</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7;">(</span> a, b, c <span style="color: #4f97d7;">)</span> <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">0</span>, <span style="color: #4f97d7; font-weight: bold;">NULL</span>, <span style="color: #2d9574;">''</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> test <span style="color: #4f97d7; font-weight: bold;">WHERE</span> b <span style="color: #4f97d7; font-weight: bold;">IS</span> <span style="color: #4f97d7; font-weight: bold;">NULL</span>;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> test <span style="color: #4f97d7; font-weight: bold;">WHERE</span> b = <span style="color: #2d9574;">''</span>;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> test <span style="color: #4f97d7; font-weight: bold;">WHERE</span> c = <span style="color: #2d9574;">''</span>;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> test <span style="color: #4f97d7; font-weight: bold;">WHERE</span> c <span style="color: #4f97d7; font-weight: bold;">IS</span> <span style="color: #4f97d7; font-weight: bold;">NULL</span>;
+
+<span style="color: #4f97d7; font-weight: bold;">DROP</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #bc6ec5; font-weight: bold;">IF</span> <span style="color: #4f97d7; font-weight: bold;">EXISTS</span> test;
+<span style="color: #4f97d7; font-weight: bold;">CREATE</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #bc6ec5; font-weight: bold;">test</span> <span style="color: #4f97d7;">(</span>
+a <span style="color: #ce537a; font-weight: bold;">INTEGER</span> <span style="color: #4f97d7; font-weight: bold;">NOT</span> <span style="color: #4f97d7; font-weight: bold;">NULL</span>,
+<span style="color: #2aa1ae; background-color: #292e34;">-- This forces a and b to have a value</span>
+b TEXT <span style="color: #4f97d7; font-weight: bold;">NOT</span> <span style="color: #4f97d7; font-weight: bold;">NULL</span>,
+c TEXT
+<span style="color: #4f97d7;">)</span>;
+
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">1</span>, <span style="color: #2d9574;">'this'</span>, <span style="color: #2d9574;">'that'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> test;
+
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7;">(</span> b, c <span style="color: #4f97d7;">)</span> <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #2d9574;">'one'</span>, <span style="color: #2d9574;">'two'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #2aa1ae; background-color: #292e34;">-- This will fail because it will create NULL for a but we specified a to be NOT NULL.</span>
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7;">(</span> a, c <span style="color: #4f97d7;">)</span> <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">1</span>, <span style="color: #2d9574;">'two'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #2aa1ae; background-color: #292e34;">-- This will fail because it will create NULL for a but we specified a to be NOT NULL.</span>
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7;">(</span> a, b <span style="color: #4f97d7;">)</span> <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">1</span>, <span style="color: #2d9574;">'two'</span> <span style="color: #4f97d7;">)</span>;  <span style="color: #2aa1ae; background-color: #292e34;">-- This will work</span>
+<span style="color: #4f97d7; font-weight: bold;">DROP</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #bc6ec5; font-weight: bold;">IF</span> <span style="color: #4f97d7; font-weight: bold;">EXISTS</span> test;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org060b5ad" class="outline-3">
+<h3 id="org060b5ad"><span class="section-number-3">2.6.</span> Constraining Column</h3>
+<div class="outline-text-3" id="text-2-6">
+<p>
+We can create a column with default value <i>viz.</i>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">DROP</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #bc6ec5; font-weight: bold;">IF</span> <span style="color: #4f97d7; font-weight: bold;">EXISTS</span> test;
+<span style="color: #4f97d7; font-weight: bold;">CREATE</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #bc6ec5; font-weight: bold;">test</span> <span style="color: #4f97d7;">(</span> a TEXT, b TEXT, c TEXT <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7;">(</span> a, b <span style="color: #4f97d7;">)</span> <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #2d9574;">'one'</span>, <span style="color: #2d9574;">'two'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> test;
+
+<span style="color: #4f97d7; font-weight: bold;">CREATE</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #bc6ec5; font-weight: bold;">test</span> <span style="color: #4f97d7;">(</span> a TEXT, b TEXT, c TEXT <span style="color: #4f97d7; font-weight: bold;">NOT</span> <span style="color: #4f97d7; font-weight: bold;">NULL</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">CREATE</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #bc6ec5; font-weight: bold;">test</span> <span style="color: #4f97d7;">(</span> a TEXT, b TEXT, c TEXT <span style="color: #4f97d7; font-weight: bold;">DEFAULT</span> <span style="color: #2d9574;">'panda'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">CREATE</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #bc6ec5; font-weight: bold;">test</span> <span style="color: #4f97d7;">(</span> a TEXT <span style="color: #4f97d7; font-weight: bold;">UNIQUE</span>, b TEXT, c TEXT <span style="color: #4f97d7; font-weight: bold;">DEFAULT</span> <span style="color: #2d9574;">'panda'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #2aa1ae; background-color: #292e34;">-- The UNIQUE constraint here forces the column a to be unique.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">-- That is any value under the column a must not appear more than once.</span>
+<span style="color: #4f97d7; font-weight: bold;">CREATE</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #bc6ec5; font-weight: bold;">test</span> <span style="color: #4f97d7;">(</span> a TEXT <span style="color: #4f97d7; font-weight: bold;">UNIQUE</span> <span style="color: #4f97d7; font-weight: bold;">NOT</span> <span style="color: #4f97d7; font-weight: bold;">NULL</span>, b TEXT, c TEXT <span style="color: #4f97d7; font-weight: bold;">DEFAULT</span> <span style="color: #2d9574;">'panda'</span> <span style="color: #4f97d7;">)</span>;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4a4aa88" class="outline-3">
+<h3 id="org4a4aa88"><span class="section-number-3">2.7.</span> Changing a Schema (<code>ALTER TABLE</code> Statement)</h3>
+<div class="outline-text-3" id="text-2-7">
+<p>
+We can change the schema by using the <code>ALTER TABLE</code> statement and also we can set the default value for all the rows (number of rows corresponding to the rows in the non-altered column)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">DROP</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #bc6ec5; font-weight: bold;">IF</span> <span style="color: #4f97d7; font-weight: bold;">EXISTS</span> test;
+<span style="color: #4f97d7; font-weight: bold;">CREATE</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #bc6ec5; font-weight: bold;">test</span> <span style="color: #4f97d7;">(</span> a TEXT, b TEXT, c TEXT <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #2d9574;">'one'</span>, <span style="color: #2d9574;">'two'</span>, <span style="color: #2d9574;">'three'</span><span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #2d9574;">'two'</span>, <span style="color: #2d9574;">'three'</span>, <span style="color: #2d9574;">'four'</span><span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #2d9574;">'three'</span>, <span style="color: #2d9574;">'four'</span>, <span style="color: #2d9574;">'five'</span><span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> test;
+
+<span style="color: #4f97d7; font-weight: bold;">ALTER</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #bc6ec5; font-weight: bold;">test</span> <span style="color: #4f97d7; font-weight: bold;">ADD</span> d TEXT;
+<span style="color: #4f97d7; font-weight: bold;">ALTER</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #bc6ec5; font-weight: bold;">test</span> <span style="color: #4f97d7; font-weight: bold;">ADD</span> e TEXT <span style="color: #4f97d7; font-weight: bold;">DEFAULT</span> <span style="color: #2d9574;">'panda'</span>;
+<span style="color: #2aa1ae; background-color: #292e34;">-- This makes the default values of all rows under a newly created column 'panda'</span>
+
+<span style="color: #4f97d7; font-weight: bold;">DROP</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #bc6ec5; font-weight: bold;">IF</span> <span style="color: #4f97d7; font-weight: bold;">EXISTS</span> test;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8885679" class="outline-3">
+<h3 id="org8885679"><span class="section-number-3">2.8.</span> <code>ID</code> Columns</h3>
+<div class="outline-text-3" id="text-2-8">
+<p>
+Method for creating an <code>ID</code> column is not standardized. <code>ID</code> columns carry the keyword <code>PRIMARY KEY</code>. They can be created <i>viz.</i>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">CREATE</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #bc6ec5; font-weight: bold;">test</span> <span style="color: #4f97d7;">(</span>
+  id <span style="color: #ce537a; font-weight: bold;">INTEGER</span> <span style="color: #4f97d7; font-weight: bold;">PRIMARY</span> <span style="color: #4f97d7; font-weight: bold;">KEY</span>,
+  <span style="color: #2aa1ae; background-color: #292e34;">-- This PRIMARY KEY keyword is the idenitification of an ID Column</span>
+  a <span style="color: #ce537a; font-weight: bold;">INTEGER</span>,
+  b TEXT
+<span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7;">(</span>a, b<span style="color: #4f97d7;">)</span> <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">10</span>, <span style="color: #2d9574;">'a'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #2aa1ae; background-color: #292e34;">-- We need not give values for the ID column</span>
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7;">(</span>a, b<span style="color: #4f97d7;">)</span> <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">11</span>, <span style="color: #2d9574;">'b'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7;">(</span>a, b<span style="color: #4f97d7;">)</span> <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">12</span>, <span style="color: #2d9574;">'c'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> test;
+<span style="color: #4f97d7; font-weight: bold;">DROP</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #bc6ec5; font-weight: bold;">IF</span> <span style="color: #4f97d7; font-weight: bold;">EXISTS</span> test;
+</pre>
+</div>
+
+<p>
+<code>PRIMARY_KEY</code>  will automatically generate a unique sequential number (forcing that column to have unique values).
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga1275ea" class="outline-3">
+<h3 id="orga1275ea"><span class="section-number-3">2.9.</span> Filtering data</h3>
+<div class="outline-text-3" id="text-2-9">
+<p>
+<code>WHERE</code> clause is used to filter the data along with logic operators <code>AND</code>, <code>OR</code>
+The <code>_</code> is used to match a single character. It is simlar to <code>.</code> in regex. 
+The <code>%</code> is used to match zero or more character (anything). It is simlar to <code>.*</code> in regex.
+The <code>IN</code> operator is used to select from a list.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> Country;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> <span style="color: #4f97d7; font-weight: bold;">Name</span>, Continent, Population <span style="color: #4f97d7; font-weight: bold;">FROM</span> Country 
+  <span style="color: #4f97d7; font-weight: bold;">WHERE</span> Population &lt; <span style="color: #a45bad;">100000</span> <span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> Population <span style="color: #4f97d7; font-weight: bold;">DESC</span>;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> <span style="color: #4f97d7; font-weight: bold;">Name</span>, Continent, Population <span style="color: #4f97d7; font-weight: bold;">FROM</span> Country 
+  <span style="color: #4f97d7; font-weight: bold;">WHERE</span> Population &lt; <span style="color: #a45bad;">100000</span> <span style="color: #4f97d7; font-weight: bold;">OR</span> Population <span style="color: #4f97d7; font-weight: bold;">IS</span> <span style="color: #4f97d7; font-weight: bold;">NULL</span> <span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> Population <span style="color: #4f97d7; font-weight: bold;">DESC</span>;
+  <span style="color: #2aa1ae; background-color: #292e34;">-- By default, the NULL state is not considered.</span>
+  <span style="color: #2aa1ae; background-color: #292e34;">-- So, to include those rows with a NULL entry we use this.</span>
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> <span style="color: #4f97d7; font-weight: bold;">Name</span>, Continent, Population <span style="color: #4f97d7; font-weight: bold;">FROM</span> Country 
+  <span style="color: #4f97d7; font-weight: bold;">WHERE</span> Population &lt; <span style="color: #a45bad;">100000</span> <span style="color: #4f97d7; font-weight: bold;">AND</span> Continent = <span style="color: #2d9574;">'Oceania'</span> <span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> Population <span style="color: #4f97d7; font-weight: bold;">DESC</span>;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> <span style="color: #4f97d7; font-weight: bold;">Name</span>, Continent, Population <span style="color: #4f97d7; font-weight: bold;">FROM</span> Country 
+  <span style="color: #4f97d7; font-weight: bold;">WHERE</span> <span style="color: #4f97d7; font-weight: bold;">Name</span> <span style="color: #4f97d7; font-weight: bold;">LIKE</span> <span style="color: #2d9574;">'%island%'</span> <span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> <span style="color: #4f97d7; font-weight: bold;">Name</span>;
+  <span style="color: #2aa1ae; background-color: #292e34;">-- '%' is a wildcard operator. It is similar to .* regex.</span>
+  <span style="color: #2aa1ae; background-color: #292e34;">-- This grabs all the names which **contains** the string 'island' in them.</span>
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> <span style="color: #4f97d7; font-weight: bold;">Name</span>, Continent, Population <span style="color: #4f97d7; font-weight: bold;">FROM</span> Country 
+ <span style="color: #4f97d7; font-weight: bold;">WHERE</span> Continent <span style="color: #4f97d7; font-weight: bold;">IN</span> <span style="color: #4f97d7;">(</span> <span style="color: #2d9574;">'Europe'</span>, <span style="color: #2d9574;">'Asia'</span> <span style="color: #4f97d7;">)</span> <span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> <span style="color: #4f97d7; font-weight: bold;">Name</span>;
+ <span style="color: #2aa1ae; background-color: #292e34;">-- This matches all the Country which either belongs to Asia or Europe.</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgffc1a81" class="outline-3">
+<h3 id="orgffc1a81"><span class="section-number-3">2.10.</span> Removing Duplicates (<code>SELECT DISTINCT</code> Statement)</h3>
+<div class="outline-text-3" id="text-2-10">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">DROP</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #bc6ec5; font-weight: bold;">IF</span> <span style="color: #4f97d7; font-weight: bold;">EXISTS</span> test;
+<span style="color: #4f97d7; font-weight: bold;">CREATE</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #bc6ec5; font-weight: bold;">test</span> <span style="color: #4f97d7;">(</span> a <span style="color: #ce537a; font-weight: bold;">int</span>, b <span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">1</span>, <span style="color: #a45bad;">1</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">2</span>, <span style="color: #a45bad;">1</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">3</span>, <span style="color: #a45bad;">1</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">4</span>, <span style="color: #a45bad;">1</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">5</span>, <span style="color: #a45bad;">1</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">1</span>, <span style="color: #a45bad;">2</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">1</span>, <span style="color: #a45bad;">2</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">1</span>, <span style="color: #a45bad;">2</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">1</span>, <span style="color: #a45bad;">2</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> test <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">1</span>, <span style="color: #a45bad;">2</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> test;
+
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> <span style="color: #4f97d7; font-weight: bold;">DISTINCT</span> a <span style="color: #4f97d7; font-weight: bold;">FROM</span> test;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> <span style="color: #4f97d7; font-weight: bold;">DISTINCT</span> b <span style="color: #4f97d7; font-weight: bold;">FROM</span> test;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> <span style="color: #4f97d7; font-weight: bold;">DISTINCT</span> a, b <span style="color: #4f97d7; font-weight: bold;">FROM</span> test;
+<span style="color: #2aa1ae; background-color: #292e34;">-- To select a and b where they are together different</span>
+
+<span style="color: #4f97d7; font-weight: bold;">DROP</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #bc6ec5; font-weight: bold;">IF</span> <span style="color: #4f97d7; font-weight: bold;">EXISTS</span> test;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge523d59" class="outline-3">
+<h3 id="orge523d59"><span class="section-number-3">2.11.</span> Ordering Output (<code>ORDER BY</code> Clause)</h3>
+<div class="outline-text-3" id="text-2-11">
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">SELECT</span> <span style="color: #4f97d7; font-weight: bold;">Name</span> <span style="color: #4f97d7; font-weight: bold;">FROM</span> Country;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> <span style="color: #4f97d7; font-weight: bold;">Name</span> <span style="color: #4f97d7; font-weight: bold;">FROM</span> Country <span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> <span style="color: #4f97d7; font-weight: bold;">Name</span>;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> <span style="color: #4f97d7; font-weight: bold;">Name</span> <span style="color: #4f97d7; font-weight: bold;">FROM</span> Country <span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> <span style="color: #4f97d7; font-weight: bold;">Name</span> <span style="color: #4f97d7; font-weight: bold;">DESC</span>;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> <span style="color: #4f97d7; font-weight: bold;">Name</span> <span style="color: #4f97d7; font-weight: bold;">FROM</span> Country <span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> <span style="color: #4f97d7; font-weight: bold;">Name</span> <span style="color: #4f97d7; font-weight: bold;">ASC</span>;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> <span style="color: #4f97d7; font-weight: bold;">Name</span>, Continent <span style="color: #4f97d7; font-weight: bold;">FROM</span> Country <span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> Continent, <span style="color: #4f97d7; font-weight: bold;">Name</span>;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> <span style="color: #4f97d7; font-weight: bold;">Name</span>, Continent, Region <span style="color: #4f97d7; font-weight: bold;">FROM</span> Country <span style="color: #4f97d7; font-weight: bold;">ORDER</span> <span style="color: #4f97d7; font-weight: bold;">BY</span> Continent <span style="color: #4f97d7; font-weight: bold;">DESC</span>, Region, <span style="color: #4f97d7; font-weight: bold;">Name</span>;
+<span style="color: #2aa1ae; background-color: #292e34;">-- While sorting with multiple columns, the order is important.</span>
+<span style="color: #2aa1ae; background-color: #292e34;">-- The first mentioned column will be sorted first and then in the chunk that appears,</span>
+<span style="color: #2aa1ae; background-color: #292e34;">-- each group is sorted by Region and then from the chunked Region, it will be sorted by Name</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf6234ec" class="outline-3">
+<h3 id="orgf6234ec"><span class="section-number-3">2.12.</span> Conditional Expressions</h3>
+<div class="outline-text-3" id="text-2-12">
+<p>
+In standard SQL, <code>0</code> is considered <code>FALSE</code> and anything not a <code>0</code> is considered <code>TRUE</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #4f97d7; font-weight: bold;">DROP</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #bc6ec5; font-weight: bold;">IF</span> <span style="color: #4f97d7; font-weight: bold;">EXISTS</span> booltest;
+<span style="color: #4f97d7; font-weight: bold;">CREATE</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #bc6ec5; font-weight: bold;">booltest</span> <span style="color: #4f97d7;">(</span>a <span style="color: #ce537a; font-weight: bold;">INTEGER</span>, b <span style="color: #ce537a; font-weight: bold;">INTEGER</span><span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> booltest <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span><span style="color: #a45bad;">1</span>, <span style="color: #a45bad;">0</span><span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> booltest;
+
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span>
+    <span style="color: #4f97d7; font-weight: bold;">CASE</span> <span style="color: #4f97d7; font-weight: bold;">WHEN</span> a <span style="color: #4f97d7; font-weight: bold;">THEN</span> <span style="color: #2d9574;">'true'</span> <span style="color: #4f97d7; font-weight: bold;">ELSE</span> <span style="color: #2d9574;">'false'</span> <span style="color: #4f97d7; font-weight: bold;">END</span> <span style="color: #4f97d7; font-weight: bold;">as</span> boolA,
+    <span style="color: #2aa1ae; background-color: #292e34;">-- Checking if a is not zero</span>
+    <span style="color: #4f97d7; font-weight: bold;">CASE</span> <span style="color: #4f97d7; font-weight: bold;">WHEN</span> b <span style="color: #4f97d7; font-weight: bold;">THEN</span> <span style="color: #2d9574;">'true'</span> <span style="color: #4f97d7; font-weight: bold;">ELSE</span> <span style="color: #2d9574;">'false'</span> <span style="color: #4f97d7; font-weight: bold;">END</span> <span style="color: #4f97d7; font-weight: bold;">as</span> boolB
+    <span style="color: #4f97d7; font-weight: bold;">FROM</span> booltest
+;
+
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span>
+  <span style="color: #4f97d7; font-weight: bold;">CASE</span> a <span style="color: #4f97d7; font-weight: bold;">WHEN</span> <span style="color: #a45bad;">1</span> <span style="color: #4f97d7; font-weight: bold;">THEN</span> <span style="color: #2d9574;">'true'</span> <span style="color: #4f97d7; font-weight: bold;">ELSE</span> <span style="color: #2d9574;">'false'</span> <span style="color: #4f97d7; font-weight: bold;">END</span> <span style="color: #4f97d7; font-weight: bold;">AS</span> boolA,
+  <span style="color: #2aa1ae; background-color: #292e34;">-- Checking if a is equal to a mentioned value (1)</span>
+  <span style="color: #4f97d7; font-weight: bold;">CASE</span> b <span style="color: #4f97d7; font-weight: bold;">WHEN</span> <span style="color: #a45bad;">1</span> <span style="color: #4f97d7; font-weight: bold;">THEN</span> <span style="color: #2d9574;">'true'</span> <span style="color: #4f97d7; font-weight: bold;">ELSE</span> <span style="color: #2d9574;">'false'</span> <span style="color: #4f97d7; font-weight: bold;">END</span> <span style="color: #4f97d7; font-weight: bold;">AS</span> boolB 
+  <span style="color: #4f97d7; font-weight: bold;">FROM</span> booltest
+;
+
+<span style="color: #4f97d7; font-weight: bold;">DROP</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #bc6ec5; font-weight: bold;">IF</span> <span style="color: #4f97d7; font-weight: bold;">EXISTS</span> booltest;
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf1f82ac" class="outline-2">
+<h2 id="orgf1f82ac"><span class="section-number-2">3.</span> Relationships</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orgeb10894" class="outline-3">
+<h3 id="orgeb10894"><span class="section-number-3">3.1.</span> Understanding <code>JOIN</code></h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+There are several types of JOIN as discussed below
+</p>
+<ol class="org-ol">
+<li><code>INNER JOIN</code> : It is the intersection part of two tables</li>
+<li><code>LEFT JOIN</code> : It is the intersection part along with the left table entries</li>
+<li><code>RIGHT JOIN</code> : It is the intersection part along with the right table entries</li>
+<li><code>FULL JOIN</code> : It combines the effect of both <code>2</code> and <code>3</code></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgc425164" class="outline-3">
+<h3 id="orgc425164"><span class="section-number-3">3.2.</span> Accessing Related Tables</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+<code>ON</code> clause tells us the condition under which the two tables must join
+Just specifying <code>LEFT JOIN</code> is enough. It is by default the <code>LEFT JOIN</code>
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-sql"><span style="color: #2aa1ae; background-color: #292e34;">-- join example tables, left and right</span>
+<span style="color: #4f97d7; font-weight: bold;">CREATE</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #4f97d7; font-weight: bold;">left</span> <span style="color: #4f97d7;">(</span> id <span style="color: #ce537a; font-weight: bold;">INTEGER</span>, description TEXT <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">CREATE</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #4f97d7; font-weight: bold;">right</span> <span style="color: #4f97d7;">(</span> id <span style="color: #ce537a; font-weight: bold;">INTEGER</span>, description TEXT <span style="color: #4f97d7;">)</span>;
+
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> <span style="color: #4f97d7; font-weight: bold;">left</span> <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">1</span>, <span style="color: #2d9574;">'left 01'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> <span style="color: #4f97d7; font-weight: bold;">left</span> <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">2</span>, <span style="color: #2d9574;">'left 02'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> <span style="color: #4f97d7; font-weight: bold;">left</span> <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">3</span>, <span style="color: #2d9574;">'left 03'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> <span style="color: #4f97d7; font-weight: bold;">left</span> <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">4</span>, <span style="color: #2d9574;">'left 04'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> <span style="color: #4f97d7; font-weight: bold;">left</span> <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">5</span>, <span style="color: #2d9574;">'left 05'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> <span style="color: #4f97d7; font-weight: bold;">left</span> <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">6</span>, <span style="color: #2d9574;">'left 06'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> <span style="color: #4f97d7; font-weight: bold;">left</span> <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">7</span>, <span style="color: #2d9574;">'left 07'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> <span style="color: #4f97d7; font-weight: bold;">left</span> <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">8</span>, <span style="color: #2d9574;">'left 08'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> <span style="color: #4f97d7; font-weight: bold;">left</span> <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">9</span>, <span style="color: #2d9574;">'left 09'</span> <span style="color: #4f97d7;">)</span>;
+
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> <span style="color: #4f97d7; font-weight: bold;">right</span> <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">6</span>, <span style="color: #2d9574;">'right 06'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> <span style="color: #4f97d7; font-weight: bold;">right</span> <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">7</span>, <span style="color: #2d9574;">'right 07'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> <span style="color: #4f97d7; font-weight: bold;">right</span> <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">8</span>, <span style="color: #2d9574;">'right 08'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> <span style="color: #4f97d7; font-weight: bold;">right</span> <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">9</span>, <span style="color: #2d9574;">'right 09'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> <span style="color: #4f97d7; font-weight: bold;">right</span> <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">10</span>, <span style="color: #2d9574;">'right 10'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> <span style="color: #4f97d7; font-weight: bold;">right</span> <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">11</span>, <span style="color: #2d9574;">'right 11'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> <span style="color: #4f97d7; font-weight: bold;">right</span> <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">11</span>, <span style="color: #2d9574;">'right 12'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> <span style="color: #4f97d7; font-weight: bold;">right</span> <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">11</span>, <span style="color: #2d9574;">'right 13'</span> <span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold;">INSERT</span> <span style="color: #4f97d7; font-weight: bold;">INTO</span> <span style="color: #4f97d7; font-weight: bold;">right</span> <span style="color: #4f97d7; font-weight: bold;">VALUES</span> <span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">11</span>, <span style="color: #2d9574;">'right 14'</span> <span style="color: #4f97d7;">)</span>;
+
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> <span style="color: #4f97d7; font-weight: bold;">left</span>;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> <span style="color: #4f97d7; font-weight: bold;">right</span>;
+
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> l.description <span style="color: #4f97d7; font-weight: bold;">AS</span> <span style="color: #4f97d7; font-weight: bold;">left</span>, r.description <span style="color: #4f97d7; font-weight: bold;">AS</span> <span style="color: #4f97d7; font-weight: bold;">right</span>
+  <span style="color: #4f97d7; font-weight: bold;">FROM</span> <span style="color: #4f97d7; font-weight: bold;">left</span> <span style="color: #4f97d7; font-weight: bold;">AS</span> l
+  <span style="color: #4f97d7; font-weight: bold;">JOIN</span> <span style="color: #4f97d7; font-weight: bold;">right</span> <span style="color: #4f97d7; font-weight: bold;">AS</span> r <span style="color: #4f97d7; font-weight: bold;">ON</span> l.id = r.id
+  ;
+
+<span style="color: #2aa1ae; background-color: #292e34;">-- restore database</span>
+<span style="color: #4f97d7; font-weight: bold;">DROP</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #4f97d7; font-weight: bold;">left</span>;
+<span style="color: #4f97d7; font-weight: bold;">DROP</span> <span style="color: #4f97d7; font-weight: bold;">TABLE</span> <span style="color: #4f97d7; font-weight: bold;">right</span>;
+
+<span style="color: #2aa1ae; background-color: #292e34;">-- sale example</span>
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> sale;
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> * <span style="color: #4f97d7; font-weight: bold;">FROM</span> item;
+
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> s.id <span style="color: #4f97d7; font-weight: bold;">AS</span> sale, i.<span style="color: #4f97d7; font-weight: bold;">name</span>, s.price 
+  <span style="color: #4f97d7; font-weight: bold;">FROM</span> sale <span style="color: #4f97d7; font-weight: bold;">AS</span> s
+  <span style="color: #4f97d7; font-weight: bold;">JOIN</span> item <span style="color: #4f97d7; font-weight: bold;">AS</span> i <span style="color: #4f97d7; font-weight: bold;">ON</span> s.item_id = i.id
+  ;
+
+<span style="color: #4f97d7; font-weight: bold;">SELECT</span> s.id <span style="color: #4f97d7; font-weight: bold;">AS</span> sale, s.<span style="color: #ce537a; font-weight: bold;">date</span>, i.<span style="color: #4f97d7; font-weight: bold;">name</span>, i.description, s.price 
+  <span style="color: #4f97d7; font-weight: bold;">FROM</span> sale <span style="color: #4f97d7; font-weight: bold;">AS</span> s
+  <span style="color: #4f97d7; font-weight: bold;">JOIN</span> item <span style="color: #4f97d7; font-weight: bold;">AS</span> i <span style="color: #4f97d7; font-weight: bold;">ON</span> s.item_id = i.id
+  ;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga6cc4cd" class="outline-3">
+<h3 id="orga6cc4cd"><span class="section-number-3">3.3.</span> Relating Multiple Tables</h3>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 15th May, 2021</p>
+<p class="author">Author: Ramasubramaniyan G</p>
+<p class="date">Modified: 2021-08-04 Wed 11:58</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

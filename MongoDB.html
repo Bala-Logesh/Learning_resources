@@ -1,0 +1,687 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-08-03 Tue 16:32 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MongoDB - A look into the NoSQL Database</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="RPS Consulting" />
+<meta name="description" content="It is database from MongoDB Vendor"
+ />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body style="font-family: 'Fira Sans', sans-serif !important;">
+<div id="content">
+<h1 class="title">MongoDB - A look into the NoSQL Database</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org44c8d0c">1. Mongo DB  Training</a>
+<ul>
+<li><a href="#org853500f">1.1. FEATURES</a></li>
+<li><a href="#org3c28da2">1.2. RELATIONAL DATABASES/SQL DATABASES</a></li>
+<li><a href="#org328c680">1.3. DOCUMENT TYPE DATABASE /NOSQL DATABASE</a></li>
+<li><a href="#org01d8f4a">1.4. INSTALLATION OF MONGODB:</a>
+<ul>
+<li><a href="#orgc10489c">1.4.1. 2 APPLCATIONS</a></li>
+</ul>
+</li>
+<li><a href="#org006efce">1.5. MongoDB DRIVERS:</a></li>
+<li><a href="#org8ba9f00">1.6. Data formats:</a>
+<ul>
+<li><a href="#org2524b65">1.6.1. JSON vs BSON(Binary) vs EJSON(extended)</a></li>
+</ul>
+</li>
+<li><a href="#org963f9d1">1.7. DATABASE AND COLLECTION CREATION:</a>
+<ul>
+<li><a href="#orgc2dc32b">1.7.1. Creating Collections</a></li>
+<li><a href="#orgab49e97">1.7.2. To see collections</a></li>
+<li><a href="#org3fa822b">1.7.3. To drop Collections</a></li>
+<li><a href="#org24e487b">1.7.4. To drop a database</a></li>
+</ul>
+</li>
+<li><a href="#org80b519a">1.8. Basic CRUD Operations:</a>
+<ul>
+<li><a href="#org142d67b">1.8.1. Fetch</a></li>
+<li><a href="#org252f03d">1.8.2. Update</a></li>
+<li><a href="#orge3a5bdf">1.8.3. Delete</a></li>
+<li><a href="#orgc34e7e5">1.8.4. Capped Collections</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org44c8d0c" class="outline-2">
+<h2 id="org44c8d0c"><span class="section-number-2">1</span> Mongo DB  Training</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+<a href="https://mongodb.com">MongoDB</a>
+</p>
+</div>
+
+<div id="outline-container-org853500f" class="outline-3">
+<h3 id="org853500f"><span class="section-number-3">1.1</span> FEATURES</h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li><b>mongo</b>: extremly large data</li>
+<li><b>MAN</b>: MONGODB,EXPRESS,ANGULAR,NODEJS</li>
+<li><b>MRN</b>: MONGODB,EXPRESS,REACR,NODEJS</li>
+<li><b>MONGO</b>:  IS JAVASCRIPT BASED DB</li>
+<li><b>INTERNALLY</b>:  IT IS USING MOZILLA'S SPIDER MONKEY  JAVASCRIPT ENGINE.</li>
+<li><b>JSON</b>:  FORMAT USED FOR CRUD &amp; BSON FORMAT IS GOING TO USE INTERNALLY</li>
+<li><b>IT</b>:  IS DOCUMENT BASED DB AND NO SQL DB</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org3c28da2" class="outline-3">
+<h3 id="org3c28da2"><span class="section-number-3">1.2</span> RELATIONAL DATABASES/SQL DATABASES</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+RDB WILL USE TABLES,RELATIONSHIPS,FIXED SCHEMA,JOIN QUERYS   EX: ORACLE,MYSQL,DB2&#x2026;
+</p>
+</div>
+</div>
+
+<div id="outline-container-org328c680" class="outline-3">
+<h3 id="org328c680"><span class="section-number-3">1.3</span> DOCUMENT TYPE DATABASE /NOSQL DATABASE</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+DATA WILL BE STORED IN THE DOCUMENT FORMAT,NO SCHEMA,NOT REQUIRED TO HAVE  JOIN QUERIES(PERFORMANCE IS MORE)
+</p>
+
+
+<p>
+Examples: MONGODB,CASSANDRA,Hbase,Redis,Couch DB,HyperGraphDB
+</p>
+
+
+<p>
+database &#x2013;&gt; collections &#x2013;&gt; documents
+</p>
+
+<p>
+collection &#x2013;&gt; table
+document &#x2014;&gt; record/row
+</p>
+
+
+<p>
+table &#x2013;&gt; records/rows	
+collections &#x2014;&gt; documents
+</p>
+
+
+<p>
+NoSQL &#x2013;&gt; NOT ONLY SQL
+</p>
+</div>
+</div>
+
+
+
+<div id="outline-container-org01d8f4a" class="outline-3">
+<h3 id="org01d8f4a"><span class="section-number-3">1.4</span> INSTALLATION OF MONGODB:</h3>
+<div class="outline-text-3" id="text-1-4">
+</div>
+<div id="outline-container-orgc10489c" class="outline-4">
+<h4 id="orgc10489c"><span class="section-number-4">1.4.1</span> 2 APPLCATIONS</h4>
+<div class="outline-text-4" id="text-1-4-1">
+<p>
+WHEN WE INSTALL MONGODB WE WILL GET 2 APPS
+</p>
+
+<ul class="org-ul">
+<li>MONGODB SHELL CLIENT</li>
+<li>MONGODB SERVER</li>
+</ul>
+
+
+<p>
+MONGODB SERVER IS RESPONSIBLE TO STORE OUR DATA IN DATABASE. MONGODB SHELL IS RESPONSIBLE TO MANAGE SERVER. BY USING THIS SHELL WE CAN PERFORM  ALL REQUIRED CRUD OPERATIONS
+</p>
+
+
+<p>
+TO LAUNCH MONGODB SERVER &#x2013;&gt; <code>mongod</code>  command
+</p>
+
+<p>
+TO LAUNCH MONGODB Shell &#x2013;&gt; <code>mongo</code>  command
+</p>
+
+
+<p>
+gui support also there for shell&#x2013;&gt; compass,Robo t3
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org006efce" class="outline-3">
+<h3 id="org006efce"><span class="section-number-3">1.5</span> MongoDB DRIVERS:</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+TO COMMUNICATE WITH MONGODB FROM JAVA/PYTHON.. NEED TO HAVE DRIVER 
+</p>
+
+<p>
+default port number 27017 
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Database</th>
+<th scope="col" class="org-right">Port Number</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">mongodb</td>
+<td class="org-right">27017</td>
+</tr>
+
+<tr>
+<td class="org-left">oracle</td>
+<td class="org-right">1521</td>
+</tr>
+
+<tr>
+<td class="org-left">mysql</td>
+<td class="org-right">3366</td>
+</tr>
+
+<tr>
+<td class="org-left">postgre</td>
+<td class="org-right">5432</td>
+</tr>
+
+<tr>
+<td class="org-left">DB2</td>
+<td class="org-right">25000</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+<a href="https://www.mongodb.com/try/download/community">MongoDB Downloads</a>
+</p>
+
+
+
+
+<p>
+to start server <code>mongod</code> command
+to start shell <code>mongo</code> command
+</p>
+
+
+<p>
+Once we start the server, we can open shell in other command line and execute command
+</p>
+
+
+<p>
+<code>db</code> is predefined object
+</p>
+
+
+<p>
+<code>db.version()</code> &#x2013;&gt;to check the version
+</p>
+
+<p>
+<code>db.help()</code> &#x2013;&gt;will give all the methods&#x2026;
+</p>
+
+
+
+<div class="org-src-container">
+<pre class="src src-shell">&gt; show dbs  <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">to see databases </span>
+
+admin   <span style="color: #a45bad;">0.000GB</span>  <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">admin db is used to store user  authentication and authorization info like usernames and password &amp;roles and used by adminstrators</span>
+config  <span style="color: #a45bad;">0.000GB</span>  <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">to store configurations of mongodb  server like port,logs,data files...</span>
+local   <span style="color: #a45bad;">0.000GB</span>  <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">local db used in relplications(duplicates)</span>
+
+&gt; use admin <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">to connect to admin db</span>
+
+&gt; show collections <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">which displays collections in admin</span>
+
+</pre>
+</div>
+
+
+<p>
+mongo compass/Robo 3t  GUI
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org8ba9f00" class="outline-3">
+<h3 id="org8ba9f00"><span class="section-number-3">1.6</span> Data formats:</h3>
+<div class="outline-text-3" id="text-1-6">
+</div>
+<div id="outline-container-org2524b65" class="outline-4">
+<h4 id="org2524b65"><span class="section-number-4">1.6.1</span> JSON vs BSON(Binary) vs EJSON(extended)</h4>
+<div class="outline-text-4" id="text-1-6-1">
+<p>
+User input in the form of JSON
+</p>
+
+<p>
+Data will be stored in mongodb server in BSON 
+</p>
+
+<p>
+EJSON IS USED TO REPRESENT  json&#x2013;&gt;bson//bson&#x2013;&gt;json
+</p>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org963f9d1" class="outline-3">
+<h3 id="org963f9d1"><span class="section-number-3">1.7</span> DATABASE AND COLLECTION CREATION:</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+EVERY DB CONTAINSE SEVERAL COLLECTIONS 
+EVERY COLLECTION CONTAINSE SEVERAL DOCUMENTS
+</p>
+
+<p>
+COLLECTION = TABLE
+</p>
+
+<p>
+DOCUMENT = RECORD/ROW
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">
+USE DATBASENAME
+use sandeepdb <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">database wont create when we create collection then db will be created</span>
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgc2dc32b" class="outline-4">
+<h4 id="orgc2dc32b"><span class="section-number-4">1.7.1</span> Creating Collections</h4>
+<div class="outline-text-4" id="text-1-7-1">
+<div class="org-src-container">
+<pre class="src src-shell">
+<span style="color: #bc6ec5; font-weight: bold;">db.createCollection</span><span style="color: #4f97d7;">(</span><span style="color: #2d9574;">"employees"</span><span style="color: #4f97d7;">)</span>
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgab49e97" class="outline-4">
+<h4 id="orgab49e97"><span class="section-number-4">1.7.2</span> To see collections</h4>
+<div class="outline-text-4" id="text-1-7-2">
+<div class="org-src-container">
+<pre class="src src-shell">
+show collections  
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3fa822b" class="outline-4">
+<h4 id="org3fa822b"><span class="section-number-4">1.7.3</span> To drop Collections</h4>
+<div class="outline-text-4" id="text-1-7-3">
+<div class="org-src-container">
+<pre class="src src-shell">
+<span style="color: #bc6ec5; font-weight: bold;">db.employees.drop</span><span style="color: #4f97d7;">()</span>
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org24e487b" class="outline-4">
+<h4 id="org24e487b"><span class="section-number-4">1.7.4</span> To drop a database</h4>
+<div class="outline-text-4" id="text-1-7-4">
+<div class="org-src-container">
+<pre class="src src-shell">
+<span style="color: #bc6ec5; font-weight: bold;">db.dropDatabase</span><span style="color: #4f97d7;">()</span>
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org80b519a" class="outline-3">
+<h3 id="org80b519a"><span class="section-number-3">1.8</span> Basic CRUD Operations:</h3>
+<div class="outline-text-3" id="text-1-8">
+<div class="org-src-container">
+<pre class="src src-shell">
+<span style="color: #bc6ec5; font-weight: bold;">db.collection.insertOne</span><span style="color: #4f97d7;">()</span>
+<span style="color: #bc6ec5; font-weight: bold;">db.collection.insertMany</span><span style="color: #4f97d7;">()</span>
+<span style="color: #bc6ec5; font-weight: bold;">db.collection.insert</span><span style="color: #4f97d7;">()</span>
+
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Example</span>
+
+<span style="color: #bc6ec5; font-weight: bold;">db.employees.insertOne</span><span style="color: #4f97d7;">(</span><span style="color: #bc6ec5;">{</span>eno:100,ename:<span style="color: #2d9574;">"suresh"</span>,esal:1000,eadd:<span style="color: #2d9574;">"hyderabad"</span><span style="color: #bc6ec5;">}</span><span style="color: #4f97d7;">)</span>
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org142d67b" class="outline-4">
+<h4 id="org142d67b"><span class="section-number-4">1.8.1</span> Fetch</h4>
+<div class="outline-text-4" id="text-1-8-1">
+<div class="org-src-container">
+<pre class="src src-shell">
+<span style="color: #bc6ec5; font-weight: bold;">db.employees.find</span><span style="color: #4f97d7;">()</span> <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">all </span>
+<span style="color: #bc6ec5; font-weight: bold;">db.employees.find</span><span style="color: #4f97d7;">()</span>.pretty<span style="color: #4f97d7;">()</span> <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">all with readable </span>
+<span style="color: #bc6ec5; font-weight: bold;">db.employees.findOne</span><span style="color: #4f97d7;">()</span> <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">one</span>
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org252f03d" class="outline-4">
+<h4 id="org252f03d"><span class="section-number-4">1.8.2</span> Update</h4>
+<div class="outline-text-4" id="text-1-8-2">
+<div class="org-src-container">
+<pre class="src src-shell">
+<span style="color: #bc6ec5; font-weight: bold;">db.collection.updateOne</span><span style="color: #4f97d7;">()</span>
+<span style="color: #bc6ec5; font-weight: bold;">db.collection.updateMany</span><span style="color: #4f97d7;">()</span>
+<span style="color: #bc6ec5; font-weight: bold;">db.collection.replaceOne</span><span style="color: #4f97d7;">()</span>
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Example</span>
+<span style="color: #bc6ec5; font-weight: bold;">db.employees.updateOne</span><span style="color: #4f97d7;">(</span><span style="color: #bc6ec5;">{</span>ename:<span style="color: #2d9574;">"suresh"</span><span style="color: #bc6ec5;">}</span>,<span style="color: #bc6ec5;">{</span>$<span style="color: #7590db;">set</span>:<span style="color: #2d9574;">{</span>esal:10000<span style="color: #2d9574;">}</span><span style="color: #bc6ec5;">}</span><span style="color: #4f97d7;">)</span>
+
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orge3a5bdf" class="outline-4">
+<h4 id="orge3a5bdf"><span class="section-number-4">1.8.3</span> Delete</h4>
+<div class="outline-text-4" id="text-1-8-3">
+<div class="org-src-container">
+<pre class="src src-shell">
+<span style="color: #bc6ec5; font-weight: bold;">db.collection.deleteOne</span><span style="color: #4f97d7;">()</span>
+
+<span style="color: #bc6ec5; font-weight: bold;">db.collection.deleteMany</span><span style="color: #4f97d7;">()</span>
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Examples</span>
+
+<span style="color: #bc6ec5; font-weight: bold;">db.employees.deleteOne</span><span style="color: #4f97d7;">(</span><span style="color: #bc6ec5;">{</span>ename:<span style="color: #2d9574;">"suresh"</span><span style="color: #bc6ec5;">}</span><span style="color: #4f97d7;">)</span>
+
+<span style="color: #bc6ec5; font-weight: bold;">db.employees.insertOne</span><span style="color: #4f97d7;">(</span><span style="color: #bc6ec5;">{</span>eno:100,ename:<span style="color: #2d9574;">"suresh"</span>,esal:1000,eadd:<span style="color: #2d9574;">"hyderabad"</span><span style="color: #bc6ec5;">}</span><span style="color: #4f97d7;">)</span>
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc34e7e5" class="outline-4">
+<h4 id="orgc34e7e5"><span class="section-number-4">1.8.4</span> Capped Collections</h4>
+<div class="outline-text-4" id="text-1-8-4">
+<div class="org-src-container">
+<pre class="src src-shell">
+<span style="color: #bc6ec5; font-weight: bold;">db.createCollection</span><span style="color: #4f97d7;">(</span>name<span style="color: #4f97d7;">)</span>
+<span style="color: #bc6ec5; font-weight: bold;">db.createCollection</span><span style="color: #4f97d7;">(</span>name,options<span style="color: #4f97d7;">)</span>
+
+max <span style="color: #a45bad;">1000</span> documents <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">1001 document,old documents will be deleted</span>
+
+
+<span style="color: #bc6ec5; font-weight: bold;">db.createCollection</span><span style="color: #4f97d7;">(</span><span style="color: #2d9574;">"employees"</span>,<span style="color: #bc6ec5;">{</span>capped:true,size:329989,max:1000<span style="color: #bc6ec5;">}</span><span style="color: #4f97d7;">)</span>
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 02.08.2021</p>
+<p class="author">Author: RPS Consulting</p>
+<p class="date">Created: 2021-08-03 Tue 16:32</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
