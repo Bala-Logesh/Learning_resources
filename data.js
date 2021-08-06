@@ -63,6 +63,10 @@ export const data = [
     name: 'Shell Scripting Crash Course',
     link: 'https://youtu.be/GtovwKDemnI',
    },
+   {
+    name: 'Exercises - Password: shell_scripting',
+    link: 'https://pastebin.com/HTkQ5NvC',
+   },
   ],
  },
  {
