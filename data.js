@@ -1,4 +1,4 @@
-export default data = [
+const data = [
  {
   topic: 'Agile Methodology',
   links: [
@@ -83,3 +83,5 @@ export default data = [
   ]
  },
 ]
+
+export default data
