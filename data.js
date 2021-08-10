@@ -88,6 +88,16 @@ export const data = [
   ],
  },
  {
+  topic: 'Java',
+  links: [
+   {
+    name: 'Java Beginners - Udemy CourseΩ',
+    link:
+     'https://www.udemy.com/course/java-tutorial/?ranMID=39197&ranEAID=JVFxdTr9V80&ranSiteID=JVFxdTr9V80-5vGpG8MMdzDsDk_CwgHSTw&LSNPUBID=JVFxdTr9V80&utm_source=aff-campaign&utm_medium=udemyads',
+   },
+  ],
+ },
+ {
   topic: 'Softwares',
   links: [
    {
